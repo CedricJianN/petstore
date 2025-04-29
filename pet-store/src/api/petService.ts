@@ -16,6 +16,15 @@ export const addPet = async (pet: Pet): Promise<Pet> => {
   return await res.json();
 };
 
+export const updatePet = async (pet: Pet): Promise<Pet> => {
+  const res = await fetch(`${API_BASE}/${pet.id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(pet),
+  });
+  return await res.json();
+};
+
 export const addBulkPets = async (pets: Pet[]): Promise<Pet[]> => {
   const res = await fetch(`${API_BASE}/bulk`, {
     method: 'POST',
@@ -26,11 +35,11 @@ export const addBulkPets = async (pets: Pet[]): Promise<Pet[]> => {
 };
 
 export const deletePet = async (id: number): Promise<void> => {
-    const res = await fetch(`${API_BASE}/${id}`, {
-      method: 'DELETE',
-    });
-  
-    if (!res.ok) {
-      throw new Error('Failed to delete pet');
-    }
-  };
+  const res = await fetch(`${API_BASE}/${id}`, {
+    method: 'DELETE',
+  });
+
+  if (!res.ok) {
+    throw new Error('Failed to delete pet');
+  }
+};
